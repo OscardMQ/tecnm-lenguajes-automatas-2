@@ -11,7 +11,7 @@
 ## 1. Fase 1: El Artesano (Dificultad Manual)
 *Reto:* Inversión de buffer in-place (char*)  
 *Describe qué problema o restricción de memoria/sintaxis identificaste al codificar a mano:*
-> 
+> Al inicio la verdad no entendia bien las instrucciones pero fui leyendo y le fui entendiendo
 
 ---
 
@@ -27,14 +27,59 @@
 
 ### 2.2 Prompt Estructurado
 ```text
-[Pega aquí el prompt formal que redactaste para la IA]
+CONTEXTO:
+Estoy en un laboratorio de Lenguajes y Autómatas II. Necesito una función en C11
+que se compila junto con un programa de pruebas usando:
+gcc -std=c11 -Wall -Wextra -Werror. Cualquier advertencia cuenta como error.
+
+ROL:
+Actúa como un programador experto en C y manejo seguro de memoria.
+
+ESPECIFICACIÓN:
+- Firma exacta, sin cambiarla: void invertir(char *s);
+- Debe invertir la cadena en su mismo espacio de memoria (in-place).
+- Prohibido usar malloc o arreglos auxiliares: solo dos índices y un char temporal.
+- Si recibe NULL, debe terminar sin fallar.
+- Debe funcionar con cadena vacía, de 1 carácter y de longitud par e impar.
+- No incluyas main().
+- Debe incluir #include "api_sesion01.h".
+
+OUTPUT:
+Devuélveme únicamente el código del archivo .c, sin explicaciones.
 ```
 
 ---
 
 ## 3. Código Devuelto por el Modelo
-```c
-// Código devuelto por el LLM
+```c# include "api_sesion01.h"
+# include <stddef.h>
+
+void invertir(char *s) {
+    if (s == NULL) {
+        return;
+    }
+
+    int i = 0;
+    int j = 0;
+    char temp;
+
+    while (s[j] != '\0') {
+        j++;
+    }
+
+    if (j == 0) {
+        return;
+    }
+    j--;
+
+    while (i < j) {
+        temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+        i++;
+        j--;
+    }
+}
 ```
 
 ---
@@ -44,8 +89,18 @@
 
 ### Salida del harness
 ```text
-Pega aquí la salida de la celda del harness. Debe terminar con:
-RESULTADO: n/n pruebas superadas
+=== AUDITORIA SESION 01 - Inversion de buffer in-place ===
+Caso                               esperado:              obtenido:              resultado
+[ 1] invertir("HOLA")                   esperado: ALOH         obtenido: ALOH         OK
+[ 2] invertir("abc")                    esperado: cba          obtenido: cba          OK
+[ 3] invertir("")                       esperado:              obtenido:              OK
+[ 4] invertir("AB")                     esperado: BA           obtenido: BA           OK
+[ 5] invertir("a")                      esperado: a            obtenido: a            OK
+[ 6] invertir(NULL)                     esperado: sin crash    obtenido: sin crash    OK
+
+RESULTADO: 6/6 pruebas superadas
+TODO EN VERDE. Documenta tu auditoria en auditorias/auditoria_sesion01.md
+
 ```
 
 * [ ] Caso base y límites superados sin *Crash*.
@@ -54,7 +109,7 @@ RESULTADO: n/n pruebas superadas
 
 ### Reporte Crítico
 *¿Qué caso borde o problema omitió la IA y cómo lo solucionaste?*
-> 
-
+> Ninguno, el prompt que le brinde me dio el codigo solo me hizo falta especificar algunas cosas
+> pero se solucionaron
 ---
-**Firma digital:** [Usuario de GitHub]
+**Firma digital:** [OscardMQ]
