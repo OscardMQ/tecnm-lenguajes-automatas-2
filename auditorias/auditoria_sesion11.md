@@ -148,10 +148,10 @@ TODO EN VERDE. Documenta tu auditoria en auditorias/auditoria_sesion11.md
 La celda con `ia_sesion11_c.c` dio exactamente la misma salida, línea por línea, y las dos compilaron sin advertencias.
 
 * [x] Caso base y límites superados sin *Crash*.
-* [x] No existen accesos fuera de límites ni *Memory Leaks*.
+* [ ] No existen accesos fuera de límites ni *Memory Leaks*.
 * [x] La complejidad teórica coincide con la implementada.
 
-El contrato no incluye una función para liberar la tabla, así que los nodos que crea el harness no se liberan. Mi implementación no pierde ningún nodo que reserva.
+Dejé sin marcar la segunda casilla por la memoria, no por los accesos. El contrato no incluye una función para liberar la tabla, así que los nodos que crea el harness no se liberan. Mi implementación no pierde ningún nodo que reserva.
 
 ### Reporte Crítico
 *¿Qué caso borde o problema omitió la IA y cómo lo solucionaste?*
